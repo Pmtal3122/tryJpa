@@ -4,6 +4,7 @@ import com.piyush.tryJpa.tryJpa.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.piyush.tryJpa.tryJpa.entities.BookEntity;
@@ -32,8 +33,8 @@ public class BookController {
 
     @PostMapping(value = "/addBook", consumes = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public BookEntity addBook(@RequestBody BookEntity bookEntity) {
-        System.out.println("Request body: " + bookEntity.getId());
-        return bookService.addBook(bookEntity);
+    public ResponseEntity<BookEntity> addBook(@RequestBody BookEntity bookEntity) {
+        BookEntity addedBook = bookService.addBook(bookEntity);
+        return new ResponseEntity<BookEntity> (addedBook, HttpStatus.ACCEPTED);
     }
 }
