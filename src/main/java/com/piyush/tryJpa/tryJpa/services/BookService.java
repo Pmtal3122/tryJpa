@@ -1,8 +1,8 @@
 package com.piyush.tryJpa.tryJpa.services;
 
+import com.piyush.tryJpa.tryJpa.dto.BookAuthorDTO;
 import com.piyush.tryJpa.tryJpa.entities.BookEntity;
 import com.piyush.tryJpa.tryJpa.repositories.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +22,11 @@ public class BookService {
     }
 
     public BookEntity addBook(BookEntity bookEntity) {
-
         return bookRepository.save(bookEntity);
+    }
+
+    public List<BookAuthorDTO> getBooksWithAuthorName() {
+        return bookRepository.getBooksWithAuthorName();
     }
 
 }

@@ -1,8 +1,7 @@
 package com.piyush.tryJpa.tryJpa.controllers;
 
+import com.piyush.tryJpa.tryJpa.dto.BookAuthorDTO;
 import com.piyush.tryJpa.tryJpa.services.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +29,9 @@ public class BookController {
     public List<BookEntity> getAllBooks() {
         return bookService.getAllBooks();
     }
+
+    @GetMapping("/getBooksWithAuthorName")
+    public ResponseEntity<List<BookAuthorDTO>> getBooksWithAuthorName() { return new ResponseEntity<>(bookService.getBooksWithAuthorName(), HttpStatus.ACCEPTED); }
 
     @PostMapping(value = "/addBook", consumes = "application/json")
     @ResponseStatus(HttpStatus.ACCEPTED)

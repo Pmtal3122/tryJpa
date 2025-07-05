@@ -1,23 +1,21 @@
 package com.piyush.tryJpa.tryJpa.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
-@Table(name = "book")
+@Table(name = "author")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookEntity {
-    
+public class AuthorEntity {
+
     @Id
     private int id;
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private AuthorEntity author;
 }
