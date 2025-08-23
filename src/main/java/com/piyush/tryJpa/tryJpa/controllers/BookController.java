@@ -2,6 +2,7 @@ package com.piyush.tryJpa.tryJpa.controllers;
 
 import com.piyush.tryJpa.tryJpa.dto.BookAuthorDTO;
 import com.piyush.tryJpa.tryJpa.services.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,8 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-    private final BookService bookService;
+    @Autowired
+    private BookService bookService;
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
