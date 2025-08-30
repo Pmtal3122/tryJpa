@@ -1,5 +1,6 @@
 package com.piyush.tryJpa.tryJpa.controllers;
 
+import com.piyush.tryJpa.tryJpa.dto.AddBookDto;
 import com.piyush.tryJpa.tryJpa.dto.BookAuthorDTO;
 import com.piyush.tryJpa.tryJpa.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,13 @@ public class BookController {
     public ResponseEntity<List<BookAuthorDTO>> getBooksWithAuthorName() { return new ResponseEntity<>(bookService.getBooksWithAuthorName(), HttpStatus.ACCEPTED); }
 
     @PostMapping(value = "/addBook", consumes = "application/json")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<BookEntity> addBook(@RequestBody BookEntity bookEntity) {
-        BookEntity addedBook = bookService.addBook(bookEntity);
-        return new ResponseEntity<BookEntity> (addedBook, HttpStatus.ACCEPTED);
+    public ResponseEntity<?> addBook(@RequestBody AddBookDto addBookDto) {
+        try {
+            BookEntity addedBook = bookService.addBook(addBookDto);
+            return ResponseEntity.ok(addedBook);
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

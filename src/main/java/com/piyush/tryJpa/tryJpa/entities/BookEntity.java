@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "book")
@@ -14,7 +13,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 public class BookEntity {
     
     @Id
-    private int id;
+    @SequenceGenerator(name = "book_seq", sequenceName = "book_seq", initialValue = 3)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
+    private Long id;
     private String name;
 
     @ManyToOne
