@@ -39,7 +39,7 @@ public final class BookService {
         log.info("Transforming AddBookDto to BookEntity for book name: {}", addBookDto.getName());
         BookEntity book = new BookEntity();
 
-        if (addBookDto.getName() == null || addBookDto.getName().trim().isEmpty())
+        if (addBookDto.getName().trim().isEmpty())
             throw new IllegalArgumentException("Book name cannot be null or empty");
         book.setName(addBookDto.getName());
 
@@ -57,10 +57,9 @@ public final class BookService {
     private Integer extractAuthorId(AddBookDto addBookDto) {
         if (addBookDto.getAuthor() != null) {
             return addBookDto.getAuthor().getId();
+        } else if (addBookDto.getAuthorId() == null) {
+            throw new IllegalArgumentException("Author information is missing");
         } else {
-            if (addBookDto.getAuthorId() == null) {
-                throw new IllegalArgumentException("Author information is missing");
-            }
             return addBookDto.getAuthorId();
         }
     }
